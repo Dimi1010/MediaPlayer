@@ -3,7 +3,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QMediaPlaylist>
 #include <QMediaPlayer>
-#include <QVideoWidget>
 #include <QSlider>
 #include <QLabel>
 
@@ -52,7 +51,6 @@ private:
     FileMetadataDetails* fileDetails;
 
     QMediaPlayer* player;
-    QVideoWidget* video;
     QMediaPlaylist* playlist;
     QSlider* vol_slider;
     QSlider* pos_slider;

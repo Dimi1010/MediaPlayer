@@ -13,9 +13,7 @@ MediaPlayer::MediaPlayer(QWidget *parent)
     ui.setupUi(this);
 
     player = new QMediaPlayer(this);
-    video = new QVideoWidget(this);
-    player->setVideoOutput(video);
-    this->setCentralWidget(video);
+    player->setVideoOutput(ui.videoWidget);
 
     playlist = new QMediaPlaylist(this);
     player->setPlaylist(playlist);
