@@ -48,7 +48,6 @@ private slots:
 
     void on_sliderMoved(int position);
 
-
 private:
     Ui::MediaPlayerClass ui;
 

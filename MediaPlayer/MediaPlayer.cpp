@@ -8,10 +8,11 @@
 constexpr int slider_max_resolution = 10000;
 
 MediaPlayer::MediaPlayer(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent), fileDetails(nullptr)
 {
     ui.setupUi(this);
 
+#pragma region CorePlayback Controls
     player = new QMediaPlayer(this);
     player->setVideoOutput(ui.videoWidget);
 
@@ -22,7 +23,9 @@ MediaPlayer::MediaPlayer(QWidget *parent)
     connect(ui.actionNext, &QAction::triggered, playlist, &QMediaPlaylist::next);
     connect(ui.actionPrevious, &QAction::triggered, playlist, &QMediaPlaylist::previous);
     connect(ui.playlistWidget, &QPlaylistWidget::itemDoubleClicked, this, &MediaPlayer::on_actionPlay_triggered);
-
+#pragma endregion
+    
+#pragma region Volume Controls
     vol_slider = new QSlider(this);
     vol_slider->setOrientation(Qt::Horizontal);
     vol_slider->setMaximum(100);
@@ -30,13 +33,14 @@ MediaPlayer::MediaPlayer(QWidget *parent)
     vol_slider->setToolTip("20");
     vol_slider->setMaximumWidth(100);
     ui.mainToolBar->addWidget(vol_slider);
-
     ui.mainToolBar->addSeparator();
 
     connect(player, &QMediaPlayer::volumeChanged, vol_slider, &QSlider::setValue);
     connect(vol_slider, &QSlider::sliderMoved, player, &QMediaPlayer::setVolume);
     connect(vol_slider, &QSlider::sliderMoved, [=](const int &value) { vol_slider->setToolTip(QString::number(value)); });
+#pragma endregion
 
+#pragma region Seek Controls
     pos_slider = new QSlider(this);
     pos_slider->setOrientation(Qt::Horizontal);
     pos_slider->setMaximum(slider_max_resolution);
@@ -44,12 +48,15 @@ MediaPlayer::MediaPlayer(QWidget *parent)
 
     connect(player, &QMediaPlayer::positionChanged, this, &MediaPlayer::on_playerPositionChanged);
     connect(pos_slider, &QSlider::sliderMoved, this, &MediaPlayer::on_sliderMoved);
+#pragma endregion
 
+#pragma region Playback Rate
     pbrate = new QLabel("Playback Rate", this);
     ui.statusBar->addPermanentWidget(pbrate);
 
     connect(player, &QMediaPlayer::mediaStatusChanged, this, &MediaPlayer::on_mediaStatusChanged);
     connect(player, &QMediaPlayer::playbackRateChanged, this, &MediaPlayer::on_playbackRateChanged);
+#pragma endregion
 }
 
 void MediaPlayer::on_actionOpen_triggered()
@@ -139,7 +146,7 @@ void MediaPlayer::on_actionRewind_triggered()
 
 void MediaPlayer::on_actionFileDetails_triggered()
 {
-    this->fileDetails = new FileMetadataDetails(this->player, this);
+    if(this->fileDetails == nullptr) this->fileDetails = new FileMetadataDetails(this->player, this);
     fileDetails->show();
 }
 
