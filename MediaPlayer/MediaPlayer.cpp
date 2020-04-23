@@ -17,6 +17,11 @@ MediaPlayer::MediaPlayer(QWidget *parent)
 
     playlist = new QMediaPlaylist(this);
     player->setPlaylist(playlist);
+    ui.playlistWidget->setPlaylist(playlist);
+
+    connect(ui.actionNext, &QAction::triggered, playlist, &QMediaPlaylist::next);
+    connect(ui.actionPrevious, &QAction::triggered, playlist, &QMediaPlaylist::previous);
+    connect(ui.playlistWidget, &QPlaylistWidget::itemDoubleClicked, this, &MediaPlayer::on_actionPlay_triggered);
 
     vol_slider = new QSlider(this);
     vol_slider->setOrientation(Qt::Horizontal);
@@ -78,14 +83,28 @@ void MediaPlayer::on_actionStop_triggered()
     ui.statusBar->showMessage("Stopped");
 }
 
-void MediaPlayer::on_actionRepeat_triggered()
+void MediaPlayer::on_actionRepeatDefault_triggered()
 {
-    if (playlist->playbackMode() != QMediaPlaylist::PlaybackMode::Loop) {
-        playlist->setPlaybackMode(QMediaPlaylist::PlaybackMode::Loop);
-    }
-    else {
-        playlist->setPlaybackMode(QMediaPlaylist::PlaybackMode::Sequential);
-    }
+    playlist->setPlaybackMode(QMediaPlaylist::PlaybackMode::Sequential);
+    ui.actionRepeatDefault->setChecked(true);
+    ui.actionRepeatPlaylist->setChecked(false);
+    ui.actionRepeatTrack->setChecked(false);
+}
+
+void MediaPlayer::on_actionRepeatPlaylist_triggered()
+{
+    playlist->setPlaybackMode(QMediaPlaylist::PlaybackMode::Loop);
+    ui.actionRepeatDefault->setChecked(false);
+    ui.actionRepeatPlaylist->setChecked(true);
+    ui.actionRepeatTrack->setChecked(false);
+}
+
+void MediaPlayer::on_actionRepeatTrack_triggered()
+{
+    playlist->setPlaybackMode(QMediaPlaylist::PlaybackMode::CurrentItemInLoop);
+    ui.actionRepeatDefault->setChecked(false);
+    ui.actionRepeatPlaylist->setChecked(false);
+    ui.actionRepeatTrack->setChecked(true);
 }
 
 void MediaPlayer::on_actionFastForward_triggered()

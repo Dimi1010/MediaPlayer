@@ -34,12 +34,18 @@
     <ClCompile Include="FileMetadataDetails.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QPlaylistWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MediaPlayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="FileMetadataDetails.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QPlaylistWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

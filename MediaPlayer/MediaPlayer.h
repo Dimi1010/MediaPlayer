@@ -26,7 +26,11 @@ private slots:
 
     void on_actionStop_triggered();
 
-    void on_actionRepeat_triggered();
+    void on_actionRepeatDefault_triggered();
+
+    void on_actionRepeatPlaylist_triggered();
+
+    void on_actionRepeatTrack_triggered();
 
     void on_actionFastForward_triggered();
 

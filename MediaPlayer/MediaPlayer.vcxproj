@@ -89,6 +89,7 @@
     <ClCompile Include="FileMetadataDetails.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediaPlayer.cpp" />
+    <ClCompile Include="QPlaylistWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MediaPlayer.h" />
@@ -102,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="FileMetadataDetails.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QPlaylistWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
