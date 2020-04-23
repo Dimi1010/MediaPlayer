@@ -5,10 +5,12 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+#include "FileMetadataDetails.h"
+
 constexpr int slider_max_resolution = 10000;
 
 MediaPlayer::MediaPlayer(QWidget *parent)
-    : QMainWindow(parent), fileDetails(nullptr)
+    : QMainWindow(parent)
 {
     ui.setupUi(this);
 
@@ -146,7 +148,7 @@ void MediaPlayer::on_actionRewind_triggered()
 
 void MediaPlayer::on_actionFileDetails_triggered()
 {
-    if(this->fileDetails == nullptr) this->fileDetails = new FileMetadataDetails(this->player, this);
+    auto fileDetails = new FileMetadataDetails(this->player, this);
     fileDetails->show();
 }
 

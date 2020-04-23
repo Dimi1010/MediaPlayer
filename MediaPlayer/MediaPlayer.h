@@ -8,8 +8,6 @@
 
 #include "ui_MediaPlayer.h"
 
-#include "FileMetadataDetails.h"
-
 class MediaPlayer : public QMainWindow
 {
     Q_OBJECT
@@ -50,8 +48,6 @@ private slots:
 
 private:
     Ui::MediaPlayerClass ui;
-
-    FileMetadataDetails* fileDetails;
 
     QMediaPlayer* player;
     QMediaPlaylist* playlist;
