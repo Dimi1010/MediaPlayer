@@ -19,7 +19,6 @@ FileMetadataDetails::FileMetadataDetails(const QMediaPlayer* player, QWidget *pa
             ui.tableWidget->setItem(row_idx, 0, new QTableWidgetItem(key));
             ui.tableWidget->setItem(row_idx, 1, new QTableWidgetItem(player->metaData(key).toString()));
         }
-        
     }
 }
 
