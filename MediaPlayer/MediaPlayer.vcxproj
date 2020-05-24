@@ -81,8 +81,8 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>$(QMake_QT_HOST_BINS_)\windeployqt.exe $(OutputPath)$(ProjectName).$(OutputType)</Command>
+      <Message>Deploys Qt DLLs</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

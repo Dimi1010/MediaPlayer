@@ -24,6 +24,7 @@ MediaPlayer::MediaPlayer(QWidget *parent)
 
     connect(ui.actionNext, &QAction::triggered, playlist, &QMediaPlaylist::next);
     connect(ui.actionPrevious, &QAction::triggered, playlist, &QMediaPlaylist::previous);
+    connect(player, &QMediaPlayer::stateChanged, ui.playlistWidget, &QPlaylistWidget::on_playerStateChanged);
     connect(ui.playlistWidget, &QPlaylistWidget::itemDoubleClicked, this, &MediaPlayer::on_actionPlay_triggered);
 #pragma endregion
     
