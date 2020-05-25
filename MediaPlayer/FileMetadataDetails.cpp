@@ -17,7 +17,16 @@ FileMetadataDetails::FileMetadataDetails(const QMediaPlayer* player, QWidget *pa
             auto row_idx = ui.tableWidget->rowCount();
             ui.tableWidget->insertRow(row_idx);
             ui.tableWidget->setItem(row_idx, 0, new QTableWidgetItem(key));
-            ui.tableWidget->setItem(row_idx, 1, new QTableWidgetItem(player->metaData(key).toString()));
+            QString value;
+            if (key == QMediaMetaData::Duration) {
+                auto data = player->metaData(key);
+                qint64 msecs = data.toLongLong();
+                value = QTime::fromMSecsSinceStartOfDay(msecs).toString();
+            }
+            else {
+                value = player->metaData(key).toString();
+            }
+            ui.tableWidget->setItem(row_idx, 1, new QTableWidgetItem(value));
         }
     }
 }
